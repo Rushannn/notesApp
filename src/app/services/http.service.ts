@@ -11,9 +11,8 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  get(endpointPart: string): Observable<any> {
-    const endpoint = `${this.apiUrl}/${endpointPart}`;
-    return this.http.get(endpoint);
+  public get<T>(endpointPart: string): Observable<T> {
+    return this.http.get<T>(`${this.apiUrl}/${endpointPart}`);
   }
 
   post(endpointPart: string, data: any): Observable<any> {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:3000'
+  API_URL: 'https://x8ki-letl-twmt.n7.xano.io/api:ylt-M_BT'
 };
 
 /*
