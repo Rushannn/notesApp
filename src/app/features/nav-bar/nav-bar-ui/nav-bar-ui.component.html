@@ -1,0 +1,14 @@
+<div class="sidebar-container">
+  <div class="sidebar">
+    <ng-container *ngIf="items">
+      <div
+        *ngFor="let item of items"
+        (click)="onSelectItem(item.id)"
+        class="sidebar-item"
+        [ngClass]="{ 'active': selectedNoteId === item.id }"
+      >
+        {{ item.title }}
+      </div>
+    </ng-container>
+  </div>
+</div>
