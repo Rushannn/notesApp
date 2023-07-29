@@ -1,3 +1,5 @@
+<notes-header></notes-header>
+
 <div class="notes-page__content">
 
   <ng-container *ngIf="(status$ | async) as status;">
@@ -10,6 +12,7 @@
       <ng-container *ngSwitchCase="'loaded'">
         <app-notes-sidebar></app-notes-sidebar>
         <app-note-viewer></app-note-viewer>
+        <app-create-note-button class="round-button" (clickCreateNoteButton)="onClickCreateNoteButton()"></app-create-note-button>
       </ng-container>
 
 

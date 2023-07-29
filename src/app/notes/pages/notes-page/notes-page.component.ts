@@ -14,4 +14,8 @@ export class NotesPageComponent {
     this.facade.init();
   }
 
+  onClickCreateNoteButton() {
+console.log('it works')
+  }
+
 }

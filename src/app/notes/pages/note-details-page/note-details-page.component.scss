@@ -1,0 +1,35 @@
+
+.note-details {
+  margin: 20px;
+}
+
+.note-details-content {
+  position: relative;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.note-details-content h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.note-details-content p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.go-to-notes-button {
+  background-color: rgba(0, 123, 255, 0.5);
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.go-to-notes-button:hover {
+  background-color: rgba(0, 123, 255, 0.7);
+}

@@ -1,4 +1,12 @@
 .notes-page__content {
   display: flex;
   max-width: 100vw;
+  position: relative;
+}
+
+.round-button {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  z-index: 100;
 }
