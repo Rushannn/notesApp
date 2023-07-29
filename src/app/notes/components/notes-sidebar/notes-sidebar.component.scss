@@ -1,0 +1,21 @@
+.sidebar {
+  width: 250px;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ccc;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-item {
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-item:hover {
+  background-color: #f5f5f5;
+}
+
+.sidebar-item.selected {
+  background-color: #009688;
+  color: white;
+}

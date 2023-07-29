@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NotesPageComponent } from './pages/notes-page/notes-page.component';
+import { NotesPageComponent } from './notes/pages/notes-page/notes-page.component';
 
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
+    redirectTo: 'notes',
+    pathMatch: 'full'
+  },
+  {
+    path: "notes",
     component: NotesPageComponent
   },
 ];

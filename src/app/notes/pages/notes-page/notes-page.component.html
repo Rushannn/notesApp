@@ -1,0 +1,23 @@
+<div class="notes-page__content">
+
+  <ng-container *ngIf="(status$ | async) as status;">
+    <ng-container [ngSwitch]="status">
+
+      <ng-container *ngSwitchCase="'loading'">
+        <p>Загрузка...</p>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'loaded'">
+        <app-notes-sidebar></app-notes-sidebar>
+        <app-note-viewer></app-note-viewer>
+      </ng-container>
+
+
+      <ng-container *ngSwitchCase="'error'">
+        <p>Ошибка!</p>
+      </ng-container>
+
+    </ng-container>
+  </ng-container>
+
+</div>

@@ -1,0 +1,13 @@
+<div class="note-viewer">
+  <ng-container *ngIf="(noteEntities$ | async) as noteEntities">
+    <ng-container *ngIf="selectedNoteId$ | async as selectedNoteId">
+      <div *ngIf="noteEntities[selectedNoteId]; else noNoteSelected">
+        <h3>{{ noteEntities[selectedNoteId].title }}</h3>
+        <p>{{ noteEntities[selectedNoteId].content }}</p>
+      </div>
+      <ng-template #noNoteSelected>
+        <p>No note selected</p>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+</div>
