@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as NotesActions from '../../store/notes.actions';
+import { NotesFacade } from '../../store/notes.facade';
 
 @Component({
   selector: 'app-notes-page',
   templateUrl: './notes-page.component.html',
   styleUrls: ['./notes-page.component.scss']
 })
-export class NotesPageComponent implements OnInit {
+export class NotesPageComponent {
 
-  constructor(private store: Store) { }
+  public readonly status$ = this.facade.status$;
 
-  ngOnInit(): void {
-    this.store.dispatch(NotesActions.loadNotes());
+  constructor(private facade: NotesFacade) {
+    this.facade.init();
   }
 
 }

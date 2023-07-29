@@ -15,6 +15,7 @@ import { NotesPageComponent } from './notes/pages/notes-page/notes-page.componen
 import { StoreModule } from '@ngrx/store';
 import { reducer as notesReducer } from './notes/store/notes.reducer'
 import { NotesEffects } from './notes/store/notes.effects';
+import { NotesFacade } from './notes/store/notes.facade';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { NotesEffects } from './notes/store/notes.effects';
     EffectsModule.forRoot([NotesEffects]),
     StoreRouterConnectingModule.forRoot()
   ],
-  providers: [],
+  providers: [NotesFacade],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
