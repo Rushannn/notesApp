@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesFacade } from '../../store/notes.facade';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateNoteDialogComponent } from '../../components/create-note-dialog/create-note-dialog.component';
 
 @Component({
   selector: 'app-notes-page',
@@ -10,12 +12,20 @@ export class NotesPageComponent {
 
   public readonly status$ = this.facade.status$;
 
-  constructor(private facade: NotesFacade) {
+  constructor(private facade: NotesFacade, private dialog: MatDialog) {
     this.facade.init();
   }
 
   onClickCreateNoteButton() {
-console.log('it works')
+    const dialogRef = this.dialog.open(CreateNoteDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Created note:', result);
+      }
+    });
   }
 
 }

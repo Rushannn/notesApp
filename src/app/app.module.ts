@@ -9,6 +9,7 @@ import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { NotesModule } from './notes/notes.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EffectsModule } from '@ngrx/effects';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
-    NotesModule
+    NotesModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
