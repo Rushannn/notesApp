@@ -11,12 +11,13 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  public get<T>(endpointPart: string): Observable<T> {
-    return this.http.get<T>(`${this.apiUrl}/${endpointPart}`);
+  public get<T>(url: string): Observable<T> {
+    return this.http.get<T>(`${this.apiUrl}/${url}`);
   }
 
-  post(endpointPart: string, data: any): Observable<any> {
-    const endpoint = `${this.apiUrl}/${endpointPart}`;
-    return this.http.post(endpoint, data);
+  post<T, D>(url: string, data: D): Observable<T> {
+    console.log(JSON.stringify(data))
+    return this.http.post<T>(`${this.apiUrl}/${url}`, data);
   }
+
 }

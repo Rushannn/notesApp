@@ -54,6 +54,10 @@ const notesReducer = createReducer(
     return { ...state, status: 'error' };
   }),
 
+  on(NotesActions.postNoteSuccess, (state, { note }) => {
+    return notesAdapter.addOne(note, { ...state })
+  }),
+
 );
 
 export function reducer(state: NotesState | undefined, action: Action) {

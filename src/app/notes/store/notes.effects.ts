@@ -6,6 +6,7 @@ import * as NotesActions from "./notes.actions";
 import { of } from "rxjs";
 import { noteDtoAdapter } from '../models/notes-dto.adapter'
 import { NoteDTO } from "../models/note-dto.model";
+import { NoteEntity } from "../models/note-entity.model";
 
 @Injectable()
 export class NotesEffects {
@@ -32,14 +33,30 @@ export class NotesEffects {
     () => this.actions$.pipe(
       ofType(NotesActions.getNote),
       mergeMap(
-        // tap(id => console.log(id)),
-        ({noteId}) => this.httpService.get<NoteDTO>(`${this.notesEndpoint}/${noteId}`)
+        ({ noteId }) => this.httpService.get<NoteDTO>(`${this.notesEndpoint}/${noteId}`)
           .pipe(
             map(
-              note => NotesActions.getNoteSuccess({
-                note: noteDtoAdapter.DTOtoEntity(note)
+              noteDto => NotesActions.getNoteSuccess({
+                note: noteDtoAdapter.DTOtoEntity(noteDto)
               }),
               catchError(() => of(NotesActions.loadNotesFailed()))
+            )
+          )
+      )
+    )
+  );
+
+  postNote$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(NotesActions.postNote),
+      mergeMap(
+        ({ note }) => this.httpService.post<NoteDTO, NoteEntity>(`${this.notesEndpoint}`, note)
+          .pipe(
+            map(
+              noteDto => NotesActions.postNoteSuccess({
+                note: noteDtoAdapter.DTOtoEntity(noteDto)
+              }),
+              catchError(() => of(NotesActions.postNoteFailed()))
             )
           )
       )

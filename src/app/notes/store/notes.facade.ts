@@ -25,14 +25,12 @@ export class NotesFacade {
       ([entities, id]) => {
         const entity = entities[id];
         if (entity) {
-          // If the entity is found in the store, return it as an observable
           return of(entity);
         } else {
-          this.store.dispatch(NotesActions.getNote({noteId: id}));
+          this.store.dispatch(NotesActions.getNote({ noteId: id }));
           return this.store.select(selectNoteEntities).pipe(
-            // Here, use exhaustMap to prevent multiple getNote actions if this observable emits multiple times
             exhaustMap(() => this.store.select(selectNoteEntities).pipe(
-              catchError(() => EMPTY) // Catch any errors that might occur during the API call
+              catchError(() => EMPTY)
             ))
           );
         }
@@ -56,6 +54,10 @@ export class NotesFacade {
       const firstItem = 0;
       this.assignSelectNoteId(ids[firstItem])
     });
+  }
+
+  public postNote(note: NoteEntity) {
+    this.store.dispatch(NotesActions.postNote({note}))
   }
 
 

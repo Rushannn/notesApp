@@ -1,19 +1,17 @@
-<h2 mat-dialog-title>Create Note</h2>
+<h2 mat-dialog-title>Создать заметку</h2>
 <mat-dialog-content>
 
   <mat-form-field>
     <input matInput placeholder="Заголовок"
     [(ngModel)]="title"
-    [ngClass]="{ 'invalid-input': isInvalid('title') }"
-    (keyup.enter)="onSubmit()">
+    autocomplete="off">
   </mat-form-field>
 
   <mat-form-field>
     <textarea matInput
     placeholder="Содержание"
-    [(ngModel)]="description"
-    [ngClass]="{ 'invalid-input': isInvalid('title') }"
-    (keyup.enter)="onSubmit()"
+    [(ngModel)]="content"
+    autocomplete="off"
     ></textarea>
   </mat-form-field>
 </mat-dialog-content>
@@ -21,8 +19,8 @@
 <mat-dialog-actions>
 
   <button mat-stroked-button color="primary"
-  [mat-dialog-close]="{ title: title, description: description }"
-  cdkFocusInitial
+  [mat-dialog-close]="{ title: title, content: content }"
+  [disabled]="isCreateButtonDisabled()"
   (click)="onSubmit()"
   >Сохранить</button>
 

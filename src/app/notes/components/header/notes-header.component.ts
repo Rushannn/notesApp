@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'notes-header',
   templateUrl: './notes-header.component.html',
   styleUrls: ['./notes-header.component.scss']
 })
-export class NotesHeaderComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class NotesHeaderComponent { }

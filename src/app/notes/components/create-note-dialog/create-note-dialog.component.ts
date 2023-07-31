@@ -1,10 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
-export interface DialogData {
-  title: string;
-  description: string;
-}
+import { NoteEntity } from '../../models/note-entity.model';
 
 @Component({
   selector: 'app-create-note-dialog',
@@ -14,31 +10,21 @@ export interface DialogData {
 export class CreateNoteDialogComponent implements OnInit {
 
   title: string = '';
-  description: string = '';
+  content: string = '';
 
   constructor(public dialogRef: MatDialogRef<CreateNoteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: NoteEntity) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
     if (!this.isCreateButtonDisabled()) {
-      this.dialogRef.close({ title: this.title.trim(), description: this.description.trim() });
+      this.dialogRef.close({ title: this.title.trim(), content: this.content.trim() });
     }
   }
 
   isCreateButtonDisabled(): boolean {
-    return !this.title.trim() || !this.description.trim();
+    return !this.title.trim() || !this.content.trim();
   }
-
-  isInvalid(fieldName: string): boolean {
-    if (fieldName === 'title') {
-      return !this.title.trim();
-    } else if (fieldName === 'description') {
-      return !this.description.trim();
-    }
-    return false;
-  }
-
 }

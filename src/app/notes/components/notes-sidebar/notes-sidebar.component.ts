@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NotesFacade } from '../../store/notes.facade';
 
 @Component({
@@ -7,7 +7,6 @@ import { NotesFacade } from '../../store/notes.facade';
   styleUrls: ['./notes-sidebar.component.scss']
 })
 export class NotesSidebarComponent {
-
   public readonly notes$ = this.facade.notes$;
   public readonly selectedNoteId$ = this.facade.selectedNoteId$;
 

@@ -1,26 +1,29 @@
-<notes-header></notes-header>
+<div class="notes-page__wrapper">
+  <div class="notes-page__header">
+    <notes-header></notes-header>
+  </div>
 
-<div class="notes-page__content">
 
-  <ng-container *ngIf="(status$ | async) as status;">
-    <ng-container [ngSwitch]="status">
+  <div class="notes-page__content">
+    <ng-container *ngIf="(status$ | async) as status;">
+      <ng-container [ngSwitch]="status">
 
-      <ng-container *ngSwitchCase="'loading'">
-        <p>Загрузка...</p>
+        <ng-container *ngSwitchCase="'loading'">
+          <p>Загрузка...</p>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'loaded'">
+          <app-notes-sidebar></app-notes-sidebar>
+          <app-note-viewer></app-note-viewer>
+          <app-create-note-button class="round-button" (clickCreateNoteButton)="onClickCreateNoteButton()">
+          </app-create-note-button>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'error'">
+          <p>Ошибка!</p>
+        </ng-container>
+
       </ng-container>
-
-      <ng-container *ngSwitchCase="'loaded'">
-        <app-notes-sidebar></app-notes-sidebar>
-        <app-note-viewer></app-note-viewer>
-        <app-create-note-button class="round-button" (clickCreateNoteButton)="onClickCreateNoteButton()"></app-create-note-button>
-      </ng-container>
-
-
-      <ng-container *ngSwitchCase="'error'">
-        <p>Ошибка!</p>
-      </ng-container>
-
     </ng-container>
-  </ng-container>
-
+  </div>
 </div>
