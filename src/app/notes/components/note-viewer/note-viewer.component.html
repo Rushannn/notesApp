@@ -2,11 +2,13 @@
   <ng-container *ngIf="(noteEntities$ | async) as noteEntities">
     <ng-container *ngIf="selectedNoteId$ | async as selectedNoteId">
       <div *ngIf="noteEntities[selectedNoteId]; else noNoteSelected">
-        <h3>{{ noteEntities[selectedNoteId].title }}</h3>
+        <h3
+        (click)="onTitleClick(selectedNoteId)"
+        >{{ noteEntities[selectedNoteId].title }}</h3>
         <p>{{ noteEntities[selectedNoteId].content }}</p>
       </div>
       <ng-template #noNoteSelected>
-        <p>No note selected</p>
+        <p>Нет заметок</p>
       </ng-template>
     </ng-container>
   </ng-container>

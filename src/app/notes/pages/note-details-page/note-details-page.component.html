@@ -1,0 +1,21 @@
+<div class="note-details">
+  <div *ngIf="currentNote$ | async as currentNote" class="note-details-content">
+    <button class="go-to-notes-button" (click)="redirectToNotes()">Назад к заметкам</button>
+    <ng-container *ngIf="(status$ | async) as status;">
+      <ng-container [ngSwitch]="status">
+        <ng-container *ngSwitchCase="'loading'">
+          <p>Loading...</p>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'loaded'">
+          <h2>{{ currentNote.title }}</h2>
+          <p>{{ currentNote.content }}</p>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'error'">
+          <p>Error!</p>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

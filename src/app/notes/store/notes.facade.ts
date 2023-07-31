@@ -2,9 +2,10 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { LoadingStatus, selectAllNotes, selectNoteEntities, selectNoteIds, selectNotesStatus, selectSelectedNoteId } from "./notes.reducer";
 import * as NotesActions from './notes.actions';
-import { filter, map, take, tap, withLatestFrom } from "rxjs/operators";
+import { catchError, exhaustMap, filter, map, switchMap, take, tap, withLatestFrom } from "rxjs/operators";
 import { NoteEntity } from "../models/note-entity.model";
-import { Observable } from "rxjs";
+import { EMPTY, Observable, of } from "rxjs";
+import { selectRouteParam } from "./notes.router.selectors";
 
 @Injectable()
 export class NotesFacade {
@@ -15,7 +16,27 @@ export class NotesFacade {
   public readonly noteEntities$ = this.store.select(selectNoteEntities);
   public readonly selectedNoteId$: Observable<number> = this.store.select(selectSelectedNoteId);
 
+
   constructor(private store: Store) { }
+
+  public noteForDetailsPage$ = this.noteEntities$.pipe(
+    withLatestFrom(this.store.select(selectRouteParam('id'))),
+    switchMap(
+      ([entities, id]) => {
+        const entity = entities[id];
+        if (entity) {
+          return of(entity);
+        } else {
+          this.store.dispatch(NotesActions.getNote({ noteId: id }));
+          return this.store.select(selectNoteEntities).pipe(
+            exhaustMap(() => this.store.select(selectNoteEntities).pipe(
+              catchError(() => EMPTY)
+            ))
+          );
+        }
+      }
+    )
+  )
 
   public init() {
     this.store.dispatch(NotesActions.loadNotes());
@@ -30,7 +51,14 @@ export class NotesFacade {
     this.noteIds$.pipe(
       filter(ids => ids.length > 0),
     ).subscribe(ids => {
-      this.assignSelectNoteId(ids[0])
+      const firstItem = 0;
+      this.assignSelectNoteId(ids[firstItem])
     });
   }
+
+  public postNote(note: NoteEntity) {
+    this.store.dispatch(NotesActions.postNote({note}))
+  }
+
+
 }

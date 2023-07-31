@@ -2,8 +2,12 @@
   <div class="sidebar">
     <div class="sidebar-header">
     </div>
-    <div *ngFor="let note of notes" [ngClass]="{ 'selected': note.id === (selectedNoteId$ | async) }" class="sidebar-item" (click)="onNoteSelectNote(note.id)">
-      <p>{{ note.title }}</p>
+    <div *ngFor="let note of notes"
+    [ngClass]="{ 'selected': note.id === (selectedNoteId$ | async) }"
+    class="sidebar-item"
+    (click)="onNoteSelectNote(note.id)"
+    [style.pointer-events]="note.id === (selectedNoteId$ | async) ? 'none' : 'auto'"
+    ><p>{{ note.title }}</p>
     </div>
   </div>
 </ng-container>

@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Создать заметку</h2>
+<mat-dialog-content>
+
+  <mat-form-field>
+    <input matInput placeholder="Заголовок"
+    [(ngModel)]="title"
+    autocomplete="off">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput
+    placeholder="Содержание"
+    [(ngModel)]="content"
+    autocomplete="off"
+    ></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+  <button mat-stroked-button color="primary"
+  [mat-dialog-close]="{ title: title, content: content }"
+  [disabled]="isCreateButtonDisabled()"
+  (click)="onSubmit()"
+  >Сохранить</button>
+
+  <button mat-stroked-button color="accent" [mat-dialog-close]="false">Отмена</button>
+</mat-dialog-actions>

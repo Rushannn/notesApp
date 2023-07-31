@@ -19,13 +19,14 @@ export const initialState: NotesState = notesAdapter.getInitialState({
 
 const notesReducer = createReducer(
   initialState,
+
   on(NotesActions.loadNotes,
     (state) => ({
       ...state,
       status: 'loading'
     })
   ),
-  on(NotesActions.loadNoteSuccess, (state, { notes }) => {
+  on(NotesActions.loadNotesSuccess, (state, { notes }) => {
     return notesAdapter.setAll(notes, { ...state, status: 'loaded' });
   }),
 
@@ -39,6 +40,22 @@ const notesReducer = createReducer(
 
   on(NotesActions.selectNote, (state, { noteId }) => {
     return { ...state, selectedUserId: noteId };
+  }),
+
+  on(NotesActions.getNote, (state) => ({
+    ...state, status: 'loading'
+  })),
+
+  on(NotesActions.getNoteSuccess, (state, { note }) => {
+    return notesAdapter.addOne(note, { ...state, status: 'loaded' })
+  }),
+
+  on(NotesActions.getNoteFailed, (state) => {
+    return { ...state, status: 'error' };
+  }),
+
+  on(NotesActions.postNoteSuccess, (state, { note }) => {
+    return notesAdapter.addOne(note, { ...state })
   }),
 
 );
@@ -73,12 +90,12 @@ export const selectNotesStatus = createSelector(
 
 export const selectNoteIds = createSelector(
   selectNotesState,
-  (state:NotesState) => selectIds(state)
+  (state: NotesState) => selectIds(state)
 );
 
 export const selectNoteEntities = createSelector(
   selectNotesState,
-  (state:NotesState) => selectEntities(state)
+  (state: NotesState) => selectEntities(state)
 );
 
 export const selectSelectedNoteId = createSelector(
